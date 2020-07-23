@@ -1,0 +1,23 @@
+From File,To File,References,From Entities,To Entities
+RELATIVE:/src/application/Program.java,RELATIVE:/src/application/UI.java,1,1,1
+RELATIVE:/src/application/Program.java,RELATIVE:/src/chess/ChessMatch.java,5,3,3
+RELATIVE:/src/application/UI.java,RELATIVE:/src/chess/ChessPiece.java,3,3,1
+RELATIVE:/src/boardgame/Board.java,RELATIVE:/src/boardgame/Piece.java,6,6,2
+RELATIVE:/src/boardgame/Board.java,RELATIVE:/src/boardgame/Position.java,6,4,3
+RELATIVE:/src/boardgame/Piece.java,RELATIVE:/src/boardgame/Board.java,3,3,1
+RELATIVE:/src/boardgame/Piece.java,RELATIVE:/src/boardgame/Position.java,1,1,1
+RELATIVE:/src/chess/ChessMatch.java,RELATIVE:/src/boardgame/Board.java,12,5,6
+RELATIVE:/src/chess/ChessMatch.java,RELATIVE:/src/boardgame/Position.java,7,2,2
+RELATIVE:/src/chess/ChessMatch.java,RELATIVE:/src/chess/ChessPiece.java,4,2,1
+RELATIVE:/src/chess/ChessMatch.java,RELATIVE:/src/chess/Color.java,3,1,2
+RELATIVE:/src/chess/ChessMatch.java,RELATIVE:/src/chess/pieces/King.java,5,2,2
+RELATIVE:/src/chess/ChessMatch.java,RELATIVE:/src/chess/pieces/Rook.java,3,2,2
+RELATIVE:/src/chess/ChessPiece.java,RELATIVE:/src/boardgame/Board.java,2,2,1
+RELATIVE:/src/chess/ChessPiece.java,RELATIVE:/src/boardgame/Piece.java,3,3,2
+RELATIVE:/src/chess/ChessPiece.java,RELATIVE:/src/chess/Color.java,3,3,1
+RELATIVE:/src/chess/pieces/King.java,RELATIVE:/src/boardgame/Board.java,2,2,1
+RELATIVE:/src/chess/pieces/King.java,RELATIVE:/src/chess/ChessPiece.java,3,3,2
+RELATIVE:/src/chess/pieces/King.java,RELATIVE:/src/chess/Color.java,2,2,1
+RELATIVE:/src/chess/pieces/Rook.java,RELATIVE:/src/boardgame/Board.java,2,2,1
+RELATIVE:/src/chess/pieces/Rook.java,RELATIVE:/src/chess/ChessPiece.java,3,3,2
+RELATIVE:/src/chess/pieces/Rook.java,RELATIVE:/src/chess/Color.java,2,2,1

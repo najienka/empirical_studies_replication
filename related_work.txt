@@ -1,0 +1,49 @@
+Proceedings of the 12th ACM/IEEE International Symposium on Empirical Software Engineering and Measurement | ACM Conferences
+
+https://eur03.safelinks.protection.outlook.com/?url=https%3A%2F%2Fdl.acm.org%2Fdoi%2Fproceedings%2F10.1145%2F3239235%3FcookieSet%3D1&amp;data=01%7C01%7Cnemitari.ajienka%40ntu.ac.uk%7Cb4073285153049848f8108d7db775ce0%7C8acbc2c5c8ed42c78169ba438a0dbe2f%7C0&amp;sdata=A9HYpmcAGo%2BxKwGy3JtPKmb%2BkxJ%2F5FSpxQ1PPPCRzAU%3D&amp;reserved=0
+
+
+Evidence-Based Software Engineering
+
+https://eur03.safelinks.protection.outlook.com/?url=https%3A%2F%2F2020.quatic.org%2Fthematic-tracks%2Fevidence-based-software-engineering&amp;data=01%7C01%7Cnemitari.ajienka%40ntu.ac.uk%7Cfb637ed023c646dcbfa608d7db40f3b7%7C8acbc2c5c8ed42c78169ba438a0dbe2f%7C0&amp;sdata=sRSS%2BXRlo6YxbT%2FW2wm5GBXPnGddQwDmSqpRXEgWdCo%3D&amp;reserved=0
+
+
+WEKA CLUSTERING techniques
+
+https://eur03.safelinks.protection.outlook.com/?url=https%3A%2F%2Fstackoverflow.com%2Fquestions%2F53544716%2Fhow-weka-evaluates-clusters&amp;data=01%7C01%7Cnemitari.ajienka%40ntu.ac.uk%7C17e09c9ed40044372a3508d7db3e5e14%7C8acbc2c5c8ed42c78169ba438a0dbe2f%7C0&amp;sdata=A7xtJQQzfnA4qjXXhOnP5XBPU8P8rnxDETzROtX%2BVN8%3D&amp;reserved=0
+
+
+a: Comparing and experimenting machine learning techniques for code smell detection
+https://link.springer.com/article/10.1007/s10664-015-9378-4#Tab2
+
+
+selected projects that could compile
+
+4 code smells - 2 for classes, 2 for methods 
+separate dataset for each code smell
+
+We experimented our approach by selecting a set of suitable machine 
+learning algorithms and testing them on the generated datasets, 
+by means of 10-fold cross validation.
+
+For each code smell type, a dataset has been created: 
+two datasets for class-level smells (Data Class and God Class) 
+and two for method-level smells (Feature Envy and Long Method).
+
+Goal Question Metric approach
+
+b: Developer-Driven Code Smell Prioritization
+
+https://fabiano-pecorelli.github.io/publications/conferences/C7.pdf
+randomly selected 9 projects from systems with over 500 classes and 
+5 years of change history out of 682 projects meeting criteria
+
+dataset and paper downloaded https://figshare.com/s/94c699da52bb7b897074
+compared against chosen baseline (addition of process metrics and dependent
+variable based on developer rankings and perception)
+
+
+c: Improving change prediction models with code smell-related information
+https://link.springer.com/article/10.1007/s10664-019-09739-0
+
+d: developer-driven smart contract design pattern detection
