@@ -1,0 +1,73 @@
+replication package for oo and centrality metrics extraction
+
+This README should allow the replication top to end of the approach to extract OO and Centrality/Network metrics
+It is a combination of bash commands (starting with '$')
+==============================================================================
+
+pre-requisite tools - java, maven, designitejava, java_semantic_similarity, terminal/command line, eclipse/netbeans, python, networkx python module, scitools understand und command line tool with free academic non commercial license, 
+
+
+There are a few steps to perform, each with some pre-requisite tool:
+1) clone repositories
+2) extract OO class attributes metrics (via DesigniteJava or SciTools Understand) 
+3) extract OO structural coupling metrics (via SciTools Understand) 
+4) extract OO conceptual coupling and cohesion metrics (via java_semantic_similarity)
+5) extract centrality/network metrics (Networkx python module)
+6) collate OO and centrality data
+7) extract change metrics from git (via change-metrics tool from mauricioaniche/change-metrics github)
+
+
+USING CASE STUDY project - guava 3,173 .java files
+
+Some repositories are tutorials and some do not contain any java files e.g., advanced-java. Some have a high number of kotlin files e.g., okhttp
+
+
+# GIT CLONE (top 10 forked JAVA projects) (output > single folder for each cloned GitHub project)
+
+$ for i in $(curl "https://api.github.com/search/repositories?q=language:java&sort=forks&order=desc&per_page=100" | grep -oP '"clone_url":\s*"\K[^"]+'); do git clone "$i" && sleep 200; done
+##&page=1&per_page=10
+
+
+# OO CLASS ATTRIBUTES METRICS (via DesigniteJava) (output > designCodeSmells.csv, implementationCodeSmells.csv, methodMetrics.csv, typeMetrics.csv files and log file in specified output folder) - NOT IN USE 
+
+example metric extraction with DesigniteJava: java -jar DesigniteJava.jar -i <input java project directory> -o <output directory>
+
+clone DesigniteJava repository from GitHub (https://github.com/tushartushar/DesigniteJava) and install with maven command - mvn clean install
+
+$ designitejavajar=/home/user/Documents/academic/empirical_studies_2020/DesigniteJava/target && repositories=/home/user/Documents/academic/empirical_studies_2020/repositories && output_folder=/home/user/Documents/academic/empirical_studies_2020/results && cd $designitejavajar && for i in $(ls $repositories); do java -Xmx4098m -jar DesigniteJava.jar -i $repositories/$i -o $output_folder/designitejava/$i && sleep 200; done
+
+projects with error - camel, elasticsearch, flink, hadoop, hive, hibernate-orm, presto, platform_frameworks_base, pinpoint, redisson, Signal-Android, spring-boot, spring-security, storm, spring-framework, tomcat, zookeeper, tutorials
+
+github case study URLs: for i in $(ls); do git -C $i remote show origin | grep -w "Fetch URL" | awk -F " " '{print $3}' ; done>> ../repositories.txt
+
+
+
+# OO CLASS ATTRIBUTES METRICS (via SciTools Understand) (output > project_name.csv and project_name-CK-ClassMetrics.txt with test classes included and log file)
+
+This command requires the core.xml file in the same directory as perl script
+
+for i in $(ls $repositories); do perl prova_OO_METRICS.pl $repositories/$i && sleep 200; done
+
+OR
+
+perl prova_OO_METRICS.pl <OO_project_folder_name>
+
+
+
+# OO STRUCTURAL COUPLING METRICS (via SciTools Understand) (output > project_name.csv with couplings, project_name-metrics.csv with metrics for classes and methods and log file)
+
+./prova_DEPENDENCIES.sh <OO_project_folder_name>
+
+
+################################################################################
+
+# OO CONCEPTUAL COUPLING AND COHESION METRICS (via java_semantic_similarity)
+
+
+# CENTRALITY/NETWORK METRICS (Networkx python module)
+
+
+# COLLATING OO AND CENTRALITY DATA
+
+
+# CHANGE METRICS (from mauricioaniche/change-metrics tool on github)

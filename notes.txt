@@ -1,0 +1,9 @@
+build jar file /home/user/Documents/git/gitdata.png
+/home/user/Documents/git/github - clone from a git repo and commit to a new repository - Stack Overflow.pdf
+/home/user/Documents/git/github initialize repo.pdf
+
+scitools licensing https://licensing.scitools.com/login
+
+scitools und linux https://scitools.com/documents/unix_install.php
+
+scitools und linux build https://scitools.com/download/all-builds/
