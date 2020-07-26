@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="MetricsTool/src"/>
+	<classpathentry kind="lib" path="MetricsTool/lib/CKMetric.jar"/>
+	<classpathentry kind="lib" path="MetricsTool/lib/lucene-core-3.1.0.jar"/>
+	<classpathentry kind="lib" path="MetricsTool/lib/org.eclipse.core.resources.jar"/>
+	<classpathentry kind="lib" path="MetricsTool/lib/org.eclipse.core.runtime-3.1.0-2.jar"/>
+	<classpathentry kind="lib" path="MetricsTool/lib/org.eclipse.jdt.core_3.8.3.v20130121-145325.jar"/>
+	<classpathentry kind="lib" path="MetricsTool/lib/org.eclipse.osgi_3.6.0.v20100128-1430_NLSONLY.jar"/>
+	<classpathentry kind="lib" path="MetricsTool/lib/org.osgi.core-4.2.0-2.jar"/>
+	<classpathentry kind="lib" path="MetricsTool/lib/readability.jar"/>
+	<classpathentry kind="output" path="MetricsTool/bin"/>
+</classpath>

@@ -1,0 +1,51 @@
+This tool contains several scripts to compute different metrics (e.g., structural and code smell). In our case, we used it to compute the historical metrics.
+In particular the class "RunHistoricalMetricsAnalysis.java" allows to compute the evolution metrics generating the csv file with all the information.
+In particular with this class you can compute the metrics from column to AE to AS (change-proneness-dataset.zip).
+After the computation of these metrics, you need to normalise the data. In particular, you can use the function STANDARDIZE on Excel.
+
+The file input is contained in three folders (i.e., projects, releases, commits).
+
+The "project" folder contains the git repositories of the software projects to analyze.
+
+The "releases" folder contains a file for each project to analyze.
+Its file format is "ReleaseNumber; ReleaseName; list<commit>":
+- ReleaseNumber is the numerical identifier of the release. The first identifier is set to one and it is incremented for each release.
+- RelaseName is the name of the release.
+- list<commit> contains the list of commit hashes for the specific release. Each hash is separated by a comma.
+
+For example, given "1;release-1;00030939,0294920942,029492094;":
+- 1 is the release id;
+- release-1 is the release name;
+- 00030939,0294920942, and 029492094 are three commits contained in this release.
+
+Similarly to the "releases" folder, the "commits" folder contains a file for each project to analyze.
+Each line in these files has the format "CommitHash; AbbreviateCommitHash; Subject; Body; list<Change(FilePath|AddedLines|ModifiedLines|RemovedLines)>":
+- CommitHash is the commit hash;
+- AbbreviateCommitHash is the abbreviated commit hash;
+- Subject is the commit title;
+- Body is the commit body;
+- list<Change> represents the changes included in the commit. Each change is separated by a comma and includes the relative path of the changed file and the numbers of added, modified, and removed lines. These four elements are separated by a pipe.
+
+For example, given "00030939;0003;subject1;body1;folder/file1|3|2|0,folder/file2|10|5|2":
+- 00030939 is the commit hash
+- 0003 is the abbreviated commit hash
+- subject1 is the commit title
+- body1 is the commit body
+    - folder/file1 is the path of the first changed file in the commit
+    - 3 is the number of added lines for file1 in the commit
+    - 2 is the number of modified lines for file1 in the commit
+    - 0 is the number of removed lines for file1 in the commit
+    - folder/file2 is the path of the second changed file in the commit
+    - 10 is the number of added lines for file2 in the commit
+    - 5 is the number of modified lines for file2 in the commit
+    - 2 is the number of removed lines for file2 in the commit
+
+We provide two examples:
+
+exp.zip
+This is a general example that explain how the files have to be organize in order to run the class.
+
+As also state in our paper [1] the dataset and in particular the source code of the data analyzed in this study (taken from another study [2]) is not available anymore
+
+[1] https://arxiv.org/abs/1905.10889
+[2] Jureczko, Marian, and Lech Madeyski. "Towards identifying software project clusters with regard to defect prediction." Proceedings of the 6th International Conference on Predictive Models in Software Engineering. 2010.
