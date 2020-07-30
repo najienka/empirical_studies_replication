@@ -18,7 +18,7 @@ public class RunQualityMetricsAnalysis {
 		
 		// Path to the directory containing all the projects under analysis 
 		//String pathToDirectory = "/Users/najienka/eclipse-workspace/case_studies/chess-system-java-master/";
-		String pathToDirectory = "/Users/najienka/eclipse-workspace/code_smell_tool/exp/projects";
+		String pathToDirectory = "/Users/najienka/eclipse-workspace/case_studies/chess-system-java-master";
 		File experimentDirectory = new File(pathToDirectory);
 		
 		String header = "className;LOC;LCOM;CBO;WMC;RFC;DIT;NOC;C3\n";

@@ -15,7 +15,7 @@ public class RunCodeSmellDetection {
 	public static void main(String args[]) {
 
 		// Path to the directory containing all the projects under analysis 
-		String pathToDirectory = "/Users/najienka/eclipse-workspace/code_smell_tool/exp/projects";
+		String pathToDirectory = "/Users/najienka/eclipse-workspace/case_studies";
 		File experimentDirectory = new File(pathToDirectory);
 
 		// Declaring Class-level code smell objects.

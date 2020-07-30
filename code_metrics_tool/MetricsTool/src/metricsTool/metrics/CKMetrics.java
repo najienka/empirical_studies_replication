@@ -760,7 +760,7 @@ int DIT = inizialization;
 		return mcCabe;
 	}
 
-	private static boolean existsDependence(ClassBean pClass1, ClassBean pClass2) {
+	public static boolean existsDependence(ClassBean pClass1, ClassBean pClass2) {
 		for(MethodBean methodClass1: pClass1.getMethods()) {
 			for(MethodBean call: methodClass1.getMethodCalls()) {
 
