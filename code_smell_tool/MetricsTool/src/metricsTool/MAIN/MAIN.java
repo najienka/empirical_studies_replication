@@ -27,14 +27,15 @@ public class MAIN {
 	
 	//Path to the directory containing all the projects under analysis 
 	static String pathToDirectory = "/Users/najienka/eclipse-workspace/case_studies/";
-
+	//static String pathToDirectory = "/Users/najienka/Documents/academic/research/datasets/reaper_dataset/case_studies";
+	
 	public static void main(String args[]) throws IOException {
 		
 		//compute metrics
-		boolStructuralDependency(); //returns boolean true/false
+		//boolStructuralDependency(); //returns boolean true/false
         CKC3Metrics();
-        otherSmellMetrics(); //contains some boolean true/false metrics
-        CCBC(); //conceptual coupling scores for class pairs
+        //otherSmellMetrics(); //contains some boolean true/false metrics
+        //CCBC(); //conceptual coupling scores for class pairs
 				
 		//writing to file
 		/*
@@ -57,9 +58,10 @@ public class MAIN {
 		String headerDep = "className1;className2;strDep\n";
 		// System.out.print(headerDep); 
 		
-		String outputDep = "";
-		outputDep += headerDep;
 		for(File project: experimentDirectory.listFiles()) {
+			String outputDep = "";
+			outputDep += headerDep;
+			System.out.println("Processing "+ project.getName() + "\n");
 			try {
 				// Method to convert a directory into a set of java packages.
 				Vector<PackageBean> packages = FolderToJavaProjectConverter.convert(project.getAbsolutePath());
@@ -97,9 +99,11 @@ public class MAIN {
 		String header = "className;LOC;LCOM;CBO;WMC;RFC;DIT;NOC;NOO;NOPA;NOPrivateA;McCabeMetric;C3\n";
 		//System.out.print(header); // out.println will move to new line leaving blank line
 		
-		String output = "";
-		output += header;
+		
 		for(File project: experimentDirectory.listFiles()) {
+			String output = "";
+			output += header;
+			System.out.println("Processing "+ project.getName() + "\n");
 			
 			try {
 				// Method to convert a directory into a set of java packages.
@@ -157,6 +161,8 @@ public class MAIN {
 		//FeatureEnvyRule featureEnvy = new FeatureEnvyRule();
 		
 		for(File project: experimentDirectory.listFiles()) {
+			
+			System.out.println("Processing "+ project.getName() + "\n");
 			String projectOutput = "class-name;CDSBP;CC;FD;Blob;SC;LM;LOC;LCOM5;TCC;Connectivity;LCC;ICH;CBO;MPC;DAC;McCabe;RFC;WMC;Halstead-Volume;Halstead-Vocabulary;Halstead-Length;DAC2;Coh;IFC;LCOM1;LCOM2;LCOM3;LCOM4\n";
 			if(!project.isHidden() && project.isDirectory() && !project.getName().contains(".DS_Store")) {
 				System.out.println("Running detection on " + project.getName());
@@ -243,9 +249,11 @@ public class MAIN {
 		String headerCCBC = "className1;className2;CCBC\n";
 		//System.out.print(headerCCBC); 
 		
-		String outputCCBC = "";
-		outputCCBC += headerCCBC;
+		
 		for(File project: experimentDirectory.listFiles()) {
+			String outputCCBC = "";
+			outputCCBC += headerCCBC;
+			System.out.println("Processing "+ project.getName() + "\n");
 			try {
 				// Method to convert a directory into a set of java packages.
 				Vector<PackageBean> packages = FolderToJavaProjectConverter.convert(project.getAbsolutePath());
