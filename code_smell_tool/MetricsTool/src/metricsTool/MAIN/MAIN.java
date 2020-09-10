@@ -51,6 +51,41 @@ public class MAIN {
 		*/
 	}
 	
+		public static void C3Metrics() {
+		File experimentDirectory = new File(pathToDirectory);
+		
+		String header = "className;C3\n";
+		//System.out.print(header); // out.println will move to new line leaving blank line
+		
+		
+		for(File project: experimentDirectory.listFiles()) {
+			String output = "";
+			output += header;
+			System.out.println("Processing "+ project.getName() + "\n");
+			
+			try {
+				// Method to convert a directory into a set of java packages.
+				Vector<PackageBean> packages = FolderToJavaProjectConverter.convert(project.getAbsolutePath());
+				Vector<ClassBean> system = FolderToJavaProjectConverter.extractClasses(project.getAbsolutePath());
+
+				for(PackageBean packageBean: packages) {
+					
+					for(ClassBean classBean: packageBean.getClasses()) {
+						//QUALITY METRICS
+						output+=packageBean.getName() +"."+classBean.getName() + ";" + ConceptualMetrics.getC3(classBean)
+								+ "\n";
+						
+					}
+				}
+				FileUtility.writeFile(output, project.getAbsolutePath() + "/" + project.getName() + "C3Metrics.csv");
+				System.out.print(output);
+			} catch (CoreException e) {
+				e.printStackTrace();
+			}	
+		}
+		
+	}
+
 	public static void boolStructuralDependency() {
 		
 		File experimentDirectory = new File(pathToDirectory);
