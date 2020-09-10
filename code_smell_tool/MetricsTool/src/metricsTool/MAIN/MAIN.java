@@ -31,13 +31,14 @@ public class MAIN {
 	
 	public static void main(String args[]) throws IOException {
 		
-		//compute metrics
+		//COMPUTE METRICS
+		C3Metrics(); //conceptual cohesion metrics
 		//boolStructuralDependency(); //returns boolean true/false
-        CKC3Metrics();
+        //CKC3Metrics();
         //otherSmellMetrics(); //contains some boolean true/false metrics
         //CCBC(); //conceptual coupling scores for class pairs
 				
-		//writing to file
+		//WRITING TO FILE techniques
 		/*
 		String path = "/Users/najienka/eclipse-workspace/case_studies/output.txt";
 		//write to file with file writer or file utility class which overwrites
@@ -47,7 +48,7 @@ public class MAIN {
         //projClasses.write(newPath + "\n");
         //projClasses.close();
         //OR
-		//FileUtility.writeFile(newPath, path);//overwrites 
+		//FileUtility.writeFile(newPath, path); //overwrites 
 		*/
 	}
 	
