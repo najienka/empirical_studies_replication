@@ -8,7 +8,7 @@ import metricsTool.beans.MethodBean;
 public class ConceptualMetrics {
 
 //	static String pathToStopword = "/Users/fabiopalomba/Documents/PhD/Papers/Working/Antipatterns/fse17-socialSmells/stopword";
-	static String pathToStopword = "/Users/najienka/eclipse-workspace/case_studies/StopWords.txt";
+	static String pathToStopword = "StopWords.txt";
 	
 	public static double getC3(ClassBean cb) {
 		Double c3=0.0;
