@@ -26,7 +26,7 @@ import metricsTool.usageExamples.FolderToJavaProjectConverter;
 public class MAIN {
 	
 	//Path to the directory containing all the projects under analysis 
-	static String pathToDirectory = "/Users/najienka/eclipse-workspace/case_studies/";
+	static String pathToDirectory = "/home/user/Documents/academic/empirical_studies/waste_case_studies/projects";
 	//static String pathToDirectory = "/Users/najienka/Documents/academic/research/datasets/reaper_dataset/case_studies";
 	
 	public static void main(String args[]) throws IOException {
@@ -78,7 +78,7 @@ public class MAIN {
 						
 					}
 				}
-				FileUtility.writeFile(output, project.getAbsolutePath() + "/" + project.getName() + "C3Metrics.csv");
+				FileUtility.writeFile(output, pathToDirectory + "/c3metrics/" + project.getName() + "C3Metrics.csv");
 				System.out.print(output);
 			} catch (CoreException e) {
 				e.printStackTrace();
