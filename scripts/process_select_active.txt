@@ -1,0 +1,19 @@
+
+
+Motivated by previous work on the perils
+of mining GitHub (TODO: ADD CITATION), e.g., a large portion of repositories
+on GitHub are not for software development, we used the
+RepoReaper framework developed by Munaiah et al. (munaiah2017curating) to
+select repositories for our study. RepoReaper was developed
+to address the difficulty to differentiate between repositories
+with engineered software projects and those with assignments
+and noise. The ratio of unwanted repositories in a stochastic
+sample could distort research and cause illogical and possibly
+incorrect conclusions. RepoReaper contains repositories classified as organisation and utility.
+
+
+To select the repositories, we collected the Java subset (462,183) from all projects (1,853,206) of the reaper dataset of various programming languages. From this subset, we further extracted all the Java repositories (95,796) that have been classified as containing an engineered (i.e., utility-based project or organisation-based project) software projects by both the Random Forest and the Score-based classifiers of RepoReaper (where BOTH scorebased_org AND randomforest_org are TRUE OR scorebased_utl AND randomforest_utl are TRUE) in the dataset. 
+
+In the Reaper dataset, a repository is represented using a set of seven dimensions, they are: (1) Community, as evidence of collaboration, (2) Continuous integration, as evidence of quality (3) Documentation, as evidence of maintainability, (4) History, as evidence of sustained evolution, (5) Issues, as evidence of project management, (6) License, as evidence of accountability, and (7) Unit testing, as evidence of quality.
+
+Hence, from the sample of engineered projects, we sorted by the number of stars, size, and the seven (7) project dimensions/fields listed above in descending order and extract the top 200 Java projects as the final sample. The stars metric serves as a surrogate metric for project popularity (TODO: ADD CITATION) and adoption by the OSS community while the other dimensions ensure that the projects have a significant commit history and activity with evidence of OSS collaboration (i.e., not a personal project).

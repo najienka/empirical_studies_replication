@@ -1,0 +1,193 @@
+#prior studies
+
+
+
+#REAPER DATASET
+In our study, a repository is represented using
+a set of seven dimensions, they are:
+1. Community, as evidence of collaboration.
+2. Continuous integration, as evidence of quality.
+3. Documentation, as evidence of maintainability.
+4. History, as evidence of sustained evolution.
+5. Issues, as evidence of project management.
+6. License, as evidence of accountability.
+7. Unit testing, as evidence of quality.
+
+In addition to the seven dimensions enumerated above, we also included repository
+size, quantified using the Source Lines of Code (SLOC) metric, as a dimension to assess,
+and control, the influence that repository size may have on the other dimensions. We
+used a popular Perl utility cloc (Danial 2014) to collect the SLOC metric from a
+repository.
+
+Shown in Table 1 are the results from the association analysis in the
+organization and utility data sets. As seen in the table, except for continuous integration
+dimension in utility data set, repository size is statistically significantly (p-value ≤ 0.05)
+associated with the binary-valued dimensions with at least medium effect size. 
+The association results indicate that a larger repository is more likely to have continuous integration
+and/or license. 
+However, we believe that the association may be an artifact of confounding factors 
+such as a organizations complying with a convention to have a license in all of
+the repositories that they own.
+
+While a repository with a large number of stars is likely to contain an engineered software project, the contrary is not
+always true.
+The validation results indicate that by using the stargazers-based classifier, researchers
+may be excluding a large set of repositories that contain engineered software projects but
+may not be popular. In contrast, the score-based and Random Forest classifiers trained on
+organization and utility data sets perform much better in terms of recall while achieving an
+acceptable level of precision.
+
+In this study, we focused only on projects written in
+the Java language. Java seems like an ideal choice, since
+it is a compiled language and it offers very feature-rich
+build systems. To determine the project’s main language, the
+GitHub API2 was used. There were approximately 2,000,000
+Java projects on GitHub at the time the study was conducted
+(see Figure 1).
+
+#selection criteria - https://ieeexplore.ieee.org/document/8449264
+- Java 
+- more than 100 classes 
+- active 
+- at least one pull request - showing collaboration/open-source development
+- commits - The project must contain more than 20 commits.
+- Duration: The project must contain software development activity of at least 50 weeks.
+- Issues: The project must contain more than 10 issues.
+- Personal Purpose: The project must not be used and maintained by one person. 
+    The project must have at least eight contributors - Handled by reaper classification models
+    where 1 (true) = engineered project 
+- Releases: The project must have at least one release.
+- Software Development: The project must only be a placeholder for software development source code.
+
+#selection criteria - In "Automatically generating documentation for lambda expressions in Java" 
+they used reaper projects -
+Repositories: Motivated by previous work on the perils
+of mining GitHub [6], e.g., a large portion of repositories
+on GitHub are not for software development, we used the
+RepoReaper framework developed by Munaiah et al. [7] to
+select repositories for our work. RepoReaper was developed
+to address the difficulty to differentiate between repositories
+with engineered software projects and those with assignments
+and noise. The ratio of unwanted repositories in a stochastic
+sample could distort research and cause illogical and possibly
+incorrect conclusions. RepoReaper contains repositories classified as organisation and utility.
+To select repositories for our study, we first obtained all
+51,392 Java repositories which had been classified as containing engineered software projects by the Random Forest
+classification of RepoReaper. We then randomly sampled from
+these 51,392 repositories in batches of 1,000 until we had
+obtained at least 400 repositories which contained at least one
+lambda expression detected by our lambda expression detector
+(see Section II-B2). This way, we were able to ensure that
+our conclusions concerning the ratio of repositories with a
+specific characteristic would generalise to the entire population
+of engineered Java repositories on GitHub containing lambda
+expressions with a confidence level of 95% and a confidence
+interval of 5.2 After cloning and analysing 4,000 repositories
+(i.e., four batches of 1,000, the number it took to find at least
+400 repositories containing at least one lambda expression),
+we had retrieved a total of 435 repositories containing lambda
+expressions, i.e., 11%. These 435 repositories are a statistically
+representative sample of all engineered Java repositories containing lambda expressions. They contained a total of 497,108
+Java files, out of which 9,933 contained at least one lambda
+expression. In total, we collected 54,071 lambda expressions
+across the 435 Java repositories.
+
+
+sort documentation - https://www.gnu.org/software/coreutils/manual/html_node/sort-invocation.html#index-numeric-sort
+-t field separator
+-n/--numeric-sort option, to sort according to string numerical value, not lexicographically
+Note that you can provide a global -n flag, to sort all fields as numerical values, 
+e.g., sort  -k5,5 -r -n -t \t filename
+e.g., sort -rn -t $'\t' -k5,5
+or per key. 
+e.g., sort -t $'\t' -k5,5rn
+e.g., sort -k1,1 -k2,2n -k3,3n file.txt
+Format for key is -k KEYDEF, where KEYDEF is F[.C][OPTS][,F[.C][OPTS]] 
+and OPTS is one or more of ordering options, 
+like n (numerical), r (reverse), g (general numeric), h (human numeric), etc.
+
+============================================================================================
+methodology steps:
+1) extract git urls of the top 200 engineered projects from the Java subset of the reaper dataset (munaiah2017curating) ordered based on selection criteria
+2) clone repositories
+3) required metrics
+
+
+
+#reaper csv file header
+repository,language,architecture,community,continuous_integration,documentation,
+history,issues,license,size,unit_test,stars,
+scorebased_org,randomforest_org,scorebased_utl,randomforest_utl
+
+
+#extract Java subset (462,183) from all projects (1,853,206) without column headings or first row (NOT IN USE)
+cat dataset.csv | awk -F',' '{if ($2 == "Java" || $2 == "language") print $0;}' > java_dataset.csv
+
+
+#extract engineered Java subset (95,796) from all projects (1,853,206) without column headings or first row
+#where BOTH scorebased_org AND randomforest_org are TRUE OR scorebased_utl AND randomforest_utl are TRUE
+cat dataset.csv | awk -F',' '{if (($2 == "Java") && (($13 == 1 && $14 == 1) || ($15 == 1 && $16 == 1) )) print $0;}' > java_eng.csv
+
+
+#extract subset of projects that meet selection criteria
+#sorted by # stars, size, and the seven (7) project dimensions/fields listed above in descending order and extract the top 200
+sort -t $',' -k12,12rn -k10,10rn -k4,4rn -k5,5rn -k6,6rn -k7,7rn -k8,8rn -k9,9rn -k11,11rn java_eng.csv | head -200  > top_200_eng.csv
+
+
+#curate list of github urls of top 200 matching projects
+cat top_200_eng.csv | awk -F',' '{print "https://github.com/" $1}'  > gitlist.txt
+
+
+#clone repositories (write stdout and stderr to log.txt)
+./gitclone.sh  > log.txt 2>&1
+
+
+#github case study URLs from the git directories
+for i in $(ls); do git -C $i remote show origin | grep -w "Fetch URL" | awk -F " " '{print $3}' ; done >> ./initial_clones.txt
+
+
+#get projects summary as project name, git url, number of classes and total sloc
+./extract_summary.sh #uses summary.sh and list of projects
+#output - project_summary.txt
+
+
+#extract ck (via scitools und command line tool) 
+#find . -type d -print0 | xargs -r0 ./myscript - d for directory and f for file
+#https://www.cyberciti.biz/faq/how-to-find-a-folder-in-linux-using-the-command-line/
+#list names of directories - ls -d */ | awk -F'/' '{print $1}' > folders.txt
+./metrics.sh #uses streamline_OO.sh and core.xml, output in metrics/
+#perl version in rep_case_studies folder
+
+
+#extract coupling metrics
+./coupling.sh #uses prova_DEPENDENCIES.sh, output in coupling_metrics/
+
+
+#extract co-change metrics
+./change.sh #uses co_change_script.sh, output in change_metrics/
+#removed: elasticsearch, neo4j, u2020, sweet-alert-dialog, VitamioBundle, tachyon, smile, recyclerview-animators, k-9, jna, joda-time, icepick, jackson (no java file)
+
+
+#extract readability metrics - needs list of java classes
+./extract_readability.sh #uses sread.sh and readability.jar, output readability/readability_metrics.csv
+
+
+NEXT
+
+#extract software networks (not needed for active projects)
+#./network.sh #uses streamline_network.sh and Infomap (chmod +x Infomap)
+
+#extract c3 attributes (via tool from previous work - catolino2020improving - https://figshare.com/s/f536bb37f3790914a32a)
+#uses stopwords.txt file in /MetricsTool/src/metricsTool/metrics/ConceptualMetrics.java
+Add code_smell_tool project to eclipse or netbeans and set path to directory containing java repositories in /MetricsTool/src/metricsTool/MAIN and run
+#output in c3metrics folder. This folder needs to be created in the path set above.
+
+===============================================================
+#extract ccbc metrics 
+
+#extract code smell (and OO/ck attributes) metrics 
+
+#extract NetworkX centrality metrics 
+
+#extract readability metrics
+
