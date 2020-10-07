@@ -1,10 +1,13 @@
 package metricsTool.MAIN;
 
+import java.util.concurrent.TimeUnit;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Vector;
 
@@ -12,6 +15,7 @@ import org.eclipse.core.runtime.CoreException;
 
 import metricsTool.beans.ClassBean;
 import metricsTool.beans.MethodBean;
+import metricsTool.beans.ModuleBean;
 import metricsTool.beans.PackageBean;
 import metricsTool.codeSmells.ClassDataShouldBePrivateRule;
 import metricsTool.codeSmells.ComplexClassRule;
@@ -26,13 +30,15 @@ import metricsTool.usageExamples.FolderToJavaProjectConverter;
 public class MAIN {
 	
 	//Path to the directory containing all the projects under analysis 
-	static String pathToDirectory = "/home/user/Documents/academic/empirical_studies/waste_case_studies/projects";
-	//static String pathToDirectory = "/Users/najienka/Documents/academic/research/datasets/reaper_dataset/case_studies";
+	//static String pathToDirectory = "/home/user/Documents/academic/empirical_studies/waste_case_studies/rep_case_studies";
+	static String pathToDirectory = "/home/user/Documents/academic/empirical_studies/waste_case_studies/comp";
 	
-	public static void main(String args[]) throws IOException {
+	public static void main(String args[]) throws IOException, InterruptedException {
 		
 		//COMPUTE METRICS
-		C3Metrics(); //conceptual cohesion metrics
+		C3MetricsModule();
+		//moduleC3Metrics(); //package cohesion
+		//C3Metrics(); //conceptual cohesion metrics
 		//boolStructuralDependency(); //returns boolean true/false
         //CKC3Metrics();
         //otherSmellMetrics(); //contains some boolean true/false metrics
@@ -52,7 +58,74 @@ public class MAIN {
 		*/
 	}
 	
-		public static void C3Metrics() {
+	public static void C3MetricsModule() {
+		File experimentDirectory = new File(pathToDirectory);
+		File outputDir = new File(pathToDirectory+"/c3metricsModule/");
+		if (! outputDir.isDirectory()) {
+			outputDir.mkdirs();
+		}
+		
+		String header = "moduleName;C3\n";
+		
+		for(File project: experimentDirectory.listFiles()) {
+			String output = "";
+			output += header;
+			System.out.println("Processing single MODULE from Project <"+ project.getName() + ">\n");
+
+			try {
+				Vector<ClassBean> system = FolderToJavaProjectConverter.extractClasses(project.getAbsolutePath());
+				ModuleBean mb = new ModuleBean();
+			    Iterator i = system.iterator();
+			    while (i.hasNext()) {
+			          if (i.next() instanceof ClassBean) {
+			        	  ClassBean newClass = (ClassBean) i.next();
+			              mb.addClass(newClass);
+			          }
+			    }
+				output+=project.getName() + ";" + ConceptualMetrics.getC3Module(mb)
+				+ "\n";
+				FileUtility.writeFile(output, pathToDirectory + "/c3metricsModule/" + project.getName() + "-C3MetricsModule.csv");
+				System.out.print(output);
+			} catch (RuntimeException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	/**
+	public static void moduleC3Metrics() {
+		File experimentDirectory = new File(pathToDirectory);
+		
+		String header = "moduleName;C3\n";
+		//System.out.print(header); // out.println will move to new line leaving blank line
+		
+		
+		for(File project: experimentDirectory.listFiles()) {
+			String output = "";
+			output += header;
+			System.out.println("Processing "+ project.getName() + "\n");
+			
+			try {
+				
+				// Method to convert a directory into a set of java packages.
+				Vector<PackageBean> packages = FolderToJavaProjectConverter.convert(project.getAbsolutePath());
+				
+				for(PackageBean packageBean: packages) {
+					output+=packageBean.getName() +";"+ ConceptualMetrics.getC3Module(packageBean)+"\n";
+				}
+				//FileUtility.writeFile(output, pathToDirectory + "/c3metrics/" + project.getName() + "C3Metrics.csv");
+				System.out.print(output);
+			} catch (CoreException e) {
+				e.printStackTrace();
+			}	
+		}
+		
+		
+		
+		
+	}*/
+	
+	
+		public static void C3Metrics() throws InterruptedException {
 		File experimentDirectory = new File(pathToDirectory);
 		
 		String header = "className;C3\n";
@@ -84,6 +157,9 @@ public class MAIN {
 				e.printStackTrace();
 			}	
 		}
+		
+		TimeUnit.SECONDS.sleep(30);
+		
 		
 	}
 
