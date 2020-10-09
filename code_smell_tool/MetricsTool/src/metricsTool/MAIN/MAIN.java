@@ -31,7 +31,7 @@ public class MAIN {
 	
 	//Path to the directory containing all the projects under analysis 
 	//static String pathToDirectory = "/home/user/Documents/academic/empirical_studies/waste_case_studies/rep_case_studies";
-	static String pathToDirectory = "/home/user/Documents/academic/empirical_studies/waste_case_studies/comp";
+	static String pathToDirectory = "/home/andrea/Downloads/empirical_studies_replication-old/abandoned";
 	
 	public static void main(String args[]) throws IOException, InterruptedException {
 		
@@ -70,22 +70,26 @@ public class MAIN {
 		for(File project: experimentDirectory.listFiles()) {
 			String output = "";
 			output += header;
-			System.out.println("Processing single MODULE from Project <"+ project.getName() + ">\n");
+			System.out.println("Processing single MODULE from Project <"+ project.getName() + ">");
 
 			try {
 				Vector<ClassBean> system = FolderToJavaProjectConverter.extractClasses(project.getAbsolutePath());
 				ModuleBean mb = new ModuleBean();
-			    Iterator i = system.iterator();
-			    while (i.hasNext()) {
+/*			    Iterator<ClassBean> i = system.iterator();
+			    while (i.hasNext()){
 			          if (i.next() instanceof ClassBean) {
 			        	  ClassBean newClass = (ClassBean) i.next();
 			              mb.addClass(newClass);
 			          }
 			    }
-				output+=project.getName() + ";" + ConceptualMetrics.getC3Module(mb)
-				+ "\n";
+*/			    
+			    for(int s = 0 ; s < system.size() ; s++){
+			        mb.addClass( system.get(s) );
+			    }
+			    
+				output+=project.getName() + ";" + ConceptualMetrics.getC3Module(mb) + "\n";
 				FileUtility.writeFile(output, pathToDirectory + "/c3metricsModule/" + project.getName() + "-C3MetricsModule.csv");
-				System.out.print(output);
+				System.out.println(output);
 			} catch (RuntimeException e) {
 				e.printStackTrace();
 			}
